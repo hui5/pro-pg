@@ -1,0 +1,79 @@
+{
+  "name": "pro-pg",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@ant-design/icons": "^4.5.0",
+    "@ant-design/pro-card": "^1.13.0",
+    "@ant-design/pro-descriptions": "^1.6.8",
+    "@ant-design/pro-form": "^1.18.3",
+    "@ant-design/pro-layout": "^6.15.3",
+    "@ant-design/pro-table": "^2.30.8",
+    "@craco/craco": "^6.1.2",
+    "@supabase/supabase-js": "^1.11.17",
+    "@testing-library/jest-dom": "^5.11.4",
+    "@testing-library/react": "^11.1.0",
+    "@testing-library/user-event": "^12.1.10",
+    "antd": "^4.14.0",
+    "axios": "^0.21.1",
+    "craco-less": "^1.17.1",
+    "lodash": "^4.17.11",
+    "moment": "^2.25.3",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-query": "^3.17.1",
+    "react-router": "^5.2.0",
+    "react-scripts": "4.0.3",
+    "react-use": "^17.2.4",
+    "web-vitals": "^1.0.1"
+  },
+  "devDependencies": {
+    "@storybook/addon-actions": "^6.2.9",
+    "@storybook/addon-essentials": "^6.2.9",
+    "@storybook/addon-links": "^6.2.9",
+    "@storybook/node-logger": "^6.2.9",
+    "@storybook/react": "^6.2.9",
+    "@types/lodash": "^4.14.144",
+    "@types/react": "^17.0.0",
+    "@types/react-dom": "^17.0.0",
+    "@types/react-router": "^5.1.15",
+    "handlebars": "^4.7.7",
+    "node-fetch": "^2.6.1",
+    "openapi-typescript": "^3.2.3",
+    "prettier": "^2.3.0",
+    "replace-in-file": "^6.2.0",
+    "storybook-preset-craco": "^0.0.4",
+    "swagger-typescript-api": "^9.0.0"
+  },
+  "scripts": {
+    "start": "craco  start",
+    "build": "craco  build",
+    "test": "craco  test",
+    "eject": "react-scripts eject",
+    "storybook": "start-storybook -p 6006 -s public",
+    "build-storybook": "build-storybook -s public"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ],
+    "rules": {
+      "import/no-anonymous-default-export": 0,
+      "react-hooks/rules-of-hooks": 0,
+      "@typescript-eslint/no-unused-expressions": 0
+    }
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}

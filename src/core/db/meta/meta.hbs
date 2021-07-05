@@ -1,0 +1,23 @@
+/**
+ *
+ *  This file was generated
+ *  At: {{date}}
+ */
+
+export const staticMeta = {
+{{#each dbMeta}}
+
+/** 
+*
+* {{@key}}
+*/
+{{@key}}: {
+{{#each this}}
+
+    {{@key}}: {{removeEmpty this}},
+
+{{/each}}
+},
+
+{{/each}}
+} as const;
