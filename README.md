@@ -1,2 +1,3 @@
-# pro-pg
+# admin UI ( ProComponents ) for postgresql
+
 
