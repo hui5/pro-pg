@@ -5,6 +5,15 @@ import React, { useRef } from "react"
 import { Operate } from "../../action/operate"
 import { useAction } from "../../action/useAction"
 import { Schema } from "../../schema/schema"
+import { Client, ClientProvider } from "core/db/client/ClientContext"
+
+type TableProps<T> = {
+  schema: Schema
+  tableDesc?: string
+  operates?: Operate<T>[]
+  // only for test, direct show edit
+  testKey?: string | number
+} & ProTableProps<any, ParamsType>
 
 const Table = <T extends object>({
   schema,
@@ -12,16 +21,10 @@ const Table = <T extends object>({
   operates,
   testKey,
   ...props
-}: {
-  schema: Schema
-  tableDesc?: string
-  operates?: Operate<T>[]
-  // only for test, direct show edit
-  testKey?: string | number
-} & ProTableProps<any, ParamsType>) => {
+}: TableProps<T>) => {
   const actionRef = useRef<ActionType>()
 
-  const { request, columns, Create, Action, editable, batch, ID, testOnly } =
+  const { request, columns, Create, editable, batch, ID, testOnly } =
     useAction<T>({
       schema,
       actionRef,

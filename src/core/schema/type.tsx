@@ -1,12 +1,16 @@
-import { ColumnsState } from '@ant-design/pro-table';
-import { ColumnMeta } from '../db/meta/useTableMeta';
-import { EMBED_PREFIX, JOIN_BY_PREFIX, JOIN_PREFIX } from './join-table/constant';
-import { DB, Item, Schema } from './schema';
+import { ColumnsState } from "@ant-design/pro-table"
+import { ColumnMeta } from "../db/meta/useTableMeta"
+import {
+  EMBED_PREFIX,
+  JOIN_BY_PREFIX,
+  JOIN_PREFIX,
+} from "./join-table/constant"
+import { DB, Item, Schema } from "./schema"
 
 export type UseSchema<definitions> = <
   N extends keyof definitions & string,
   T extends definitions[N],
-  ReturnDraft extends boolean = false,
+  ReturnDraft extends boolean = false
 >(
   name: N,
   userDef?: UserDef<T>,
@@ -16,66 +20,61 @@ export type UseSchema<definitions> = <
      *  isEmpty []    cols = meta.cols   show all cols
      *  not empty     cols = cols        show cols
      */
-    cols?: (keyof T & string)[] | [];
-    type?: 'normal' | 'embed' | 'static';
-    join?: Join<T, Extract<T, JOIN_PRE>>;
-    joinBy?: JoinBy<T, Extract<T, JOIN_BY_PRE>>;
+    cols?: (keyof T & string)[] | []
+    type?: "normal" | "embed" | "static"
+    join?: Join<T, ExtractByPre<T, JOIN_PRE>>
+    joinBy?: JoinBy<T, ExtractByPre<T, JOIN_BY_PRE>>
     /**  when returnDraft: addKeys will force set to false .  only return draft, no join table added.  */
-    returnDraft?: ReturnDraft;
+    returnDraft?: ReturnDraft
     /**  embed use it  to filter foreign table ,  meanwhile return pass to table  */
-    params?: {
-      [key in keyof T]?: any;
-    };
+    params?: Partial<UserEntity<T>>
     /**  columns state */
-    hide?: (keyof T)[];
-    show?: (keyof T)[]; // only a additional to hide
+    hide?: (keyof T)[]
+    show?: (keyof T)[] // only a additional to hide
 
     /** whether add keys, only work when cols is set,   default true   */
-    addKeys?: boolean;
-  },
+    addKeys?: boolean
+  }
 ) => ReturnDraft extends true
   ? {
       // inner use
-      draft: Draft;
+      draft: Draft
     }
   : {
-      schema: Schema;
-      tableDesc: string;
+      schema: Schema
+      tableDesc: string
       /** not modify, direct return  */
-      params: {
-        [key in keyof T]?: any;
-      };
-      columnsStateMap?: Record<string, ColumnsState>;
-      onColumnsStateChange?: (map: Record<string, ColumnsState>) => void;
-    };
+      params: Partial<UserEntity<T>>
+      columnsStateMap?: Record<string, ColumnsState>
+      onColumnsStateChange?: (map: Record<string, ColumnsState>) => void
+    }
 
 export type UserDef<T> = {
-  [key in keyof T as key extends EMBED_KEY | JOIN_KEY | JOIN_BY_KEY ? never : key]?:
-    | false
-    | number
-    | UserItem<T, key>;
-};
+  [key in keyof UserEntity<T>]?: false | number | UserItem<T, key>
+}
+
+type UserEntity<T> = Omit<T, EMBED_KEY | JOIN_KEY | JOIN_BY_KEY>
 
 export type Embed<T> =
   | {
-      [key in keyof T]?: Pick<Item<T>, 'title' | 'render'>;
+      [key in keyof T]?: Pick<Item<T>, "title" | "render">
     }
-  | false;
+  | false
 
-type ArrayElement<A> = A extends readonly (infer T)[] ? T : never;
+type ArrayElement<A> = A extends readonly (infer T)[] ? T : never
 
-export type Extract<T, Prefix extends string> = {
+export type ExtractByPre<T, Prefix extends string> = {
   [key in keyof T as key extends `${Prefix}${infer keyWithoutPrefix}`
     ? keyWithoutPrefix
-    : never]?: T[key];
-};
+    : never]?: T[key]
+}
 
-type EMBED_PRE = typeof EMBED_PREFIX;
-export type EMBED_KEY = `${EMBED_PRE}${string}`;
-type JOIN_PRE = typeof JOIN_PREFIX;
-export type JOIN_KEY = `${JOIN_PRE}${string}`;
-type JOIN_BY_PRE = typeof JOIN_BY_PREFIX;
-export type JOIN_BY_KEY = `${JOIN_BY_PRE}${string}`;
+type EMBED_PRE = typeof EMBED_PREFIX
+export type EMBED_KEY = `${EMBED_PRE}${string}`
+type JOIN_PRE = typeof JOIN_PREFIX
+export type JOIN_KEY = `${JOIN_PRE}${string}`
+type JOIN_BY_PRE = typeof JOIN_BY_PREFIX
+export type JOIN_BY_KEY = `${JOIN_BY_PRE}${string}`
 
 export type UserItem<T, K> = K extends keyof T
   ? K extends JOIN_KEY
@@ -85,44 +84,44 @@ export type UserItem<T, K> = K extends keyof T
     : `${EMBED_PRE}${K & string}` extends keyof T
     ? EmbedItem<T, K>
     : _Item<T>
-  : _Item<T>;
+  : _Item<T>
 
 type _Item<T> = {
   /** order column :  1: first, ... -1 : last */
-  _order?: number;
-} & Item<T>;
+  _order?: number
+} & Item<T>
 
 export type EmbedItem<T, K> = _Item<T> & {
-  _embed?: Embed<T[`${EMBED_PRE}${K & string}` & keyof T]>;
-};
+  _embed?: Embed<T[`${EMBED_PRE}${K & string}` & keyof T]>
+}
 
 export type JoinItem<T, I> = _Item<T> & {
-  titleText?: string;
-  cols?: (keyof ArrayElement<I> & string)[];
-};
+  titleText?: string
+  cols?: (keyof ArrayElement<I> & string)[]
+}
 
 export type JoinByItem<T, K> = JoinItem<T, K> & {
-  manageable?: boolean;
-};
+  manageable?: boolean
+}
 
 export type Join<T, J> = {
-  [key in keyof J]?: JoinItem<T, J[key]>;
-};
+  [key in keyof J]?: JoinItem<T, J[key]>
+}
 
 export type JoinBy<T, J> = {
-  [key in keyof J]?: JoinByItem<T, J[key]>;
-};
+  [key in keyof J]?: JoinByItem<T, J[key]>
+}
 
 export type Column = ColumnMeta & {
-  isEmbed?: boolean;
-  isJoin?: boolean;
-  isJoinBy?: boolean;
-};
+  isEmbed?: boolean
+  isJoin?: boolean
+  isJoinBy?: boolean
+}
 
 export type DraftItem<T, K> = UserItem<T, K> & {
-  _column?: ColumnMeta;
-};
+  _column?: ColumnMeta
+}
 
 export type Draft = DB & {
-  columns: DraftItem<any, any>[];
-};
+  columns: DraftItem<any, any>[]
+}

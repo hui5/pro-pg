@@ -1,5 +1,5 @@
-import { useSchema } from "client/demo"
-import { Todo } from "client/demo/meta/types"
+import { useSchema } from "pages/demo/client"
+import { Todo } from "pages/demo/client/meta/types"
 import React from "react"
 import Table from "core/ui/table"
 

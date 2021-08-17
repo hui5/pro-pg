@@ -1,11 +1,10 @@
-import { useSchema } from "client/demo"
-import { Actor, TodoActor } from "client/demo/meta/types"
+import { useSchema } from "pages/demo/client"
+import { Actor, TodoActor } from "pages/demo/client/meta/types"
 import { BadgeNumber } from "core/ui/components/BadgeNumber"
 import { Dialog } from "core/ui/components/Dialog"
 import Table from "core/ui/table"
 import LightTable from "core/ui/table/LightTable"
 import { filter } from "lodash"
-import React from "react"
 
 export const actor = () => {
   return (

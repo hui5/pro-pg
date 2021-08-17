@@ -1,7 +1,7 @@
 import { Select, select as _select } from "core/column/valuetype/search-select"
 import { UseSchema } from "core/schema/type"
 import { default as _useSchema } from "core/schema/useSchema"
-import { initClient } from "../../core/db/client/initClient"
+import { initClient } from "core/db/client/initClient"
 import { API_KEY, API_URL } from "./api_key"
 import * as baseColumns from "./config/base-column"
 import cols from "./config/cols"
