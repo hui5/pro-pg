@@ -1,5 +1,5 @@
-import { useSchema } from "pages/demo/client"
-import { Actor, TodoActor } from "pages/demo/client/meta/types"
+import { useSchema } from "demo/client"
+import { Actor, TodoActor } from "demo/client/meta/types"
 import { BadgeNumber } from "core/ui/components/BadgeNumber"
 import { Dialog } from "core/ui/components/Dialog"
 import Table from "core/ui/table"

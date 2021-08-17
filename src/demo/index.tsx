@@ -1,6 +1,6 @@
 import { useSchema } from "./client"
 import Table from "core/ui/table"
-import { Actor, TodoActor, Todo } from "pages/demo/client/meta/types"
+import { Actor, TodoActor, Todo } from "demo/client/meta/types"
 import { BadgeNumber } from "core/ui/components/BadgeNumber"
 import { Dialog } from "core/ui/components/Dialog"
 import LightTable from "core/ui/table/LightTable"

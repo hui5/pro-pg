@@ -1,12 +1,9 @@
-import { client } from "pages/dvdrental/client"
-import { client as demoClient } from "pages/demo/client"
-
 import { ClientProvider } from "core/db/client/ClientContext"
+import { client } from "dvdrental/client"
+import { client as demoClient } from "demo/client"
 
-import DvdRental from "pages/dvdrental"
-import Demo from "pages/demo"
-
-// import "./App.css"
+import DvdRental from "dvdrental"
+import Demo from "demo"
 
 import { Divider, Typography } from "antd"
 
