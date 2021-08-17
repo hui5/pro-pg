@@ -1,4 +1,6 @@
-import { useSchema } from "./client"
+import { ClientProvider } from "core/db/client/ClientContext"
+
+import { client, useSchema } from "./client"
 import Table from "core/ui/table"
 import { Actor, TodoActor, Todo } from "demo/client/meta/types"
 import { BadgeNumber } from "core/ui/components/BadgeNumber"
@@ -8,7 +10,7 @@ import { filter } from "lodash"
 import { Collapse } from "antd"
 
 const { Panel } = Collapse
-export default () => (
+const Page = () => (
   <Collapse
     ghost
     accordion={true}
@@ -83,4 +85,10 @@ export default () => (
       />
     </Panel>
   </Collapse>
+)
+
+export default () => (
+  <ClientProvider client={client}>
+    <Page />
+  </ClientProvider>
 )
