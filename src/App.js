@@ -14,7 +14,7 @@ const Layout = () => {
   const location = useLocation()
   return (
     <ProLayout
-      title=""
+      title="pro-pg"
       route={{
         path: "/",
         routes: [

@@ -1,7 +1,7 @@
 /**
  *
  *  This file was generated
- *  At: Tue Aug 17 2021 20:28:12 GMT+0800 (China Standard Time)
+ *  At: Wed Aug 18 2021 15:36:34 GMT+0800 (China Standard Time)
  */
 
 export const staticMeta = {

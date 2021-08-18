@@ -169,8 +169,10 @@ export interface definitions {
      * This is a Primary Key.<pk/>
      */
     film_id: number;
+    /** 名称 */
     title: string;
     description?: string;
+    /** 发布年份 */
     release_year?: number;
     /**
      * Note:

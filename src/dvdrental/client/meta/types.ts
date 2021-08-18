@@ -211,13 +211,19 @@ export interface Film {
    */
   film_id: number;
 
-  /** @format character varying */
+  /**
+   * 名称
+   * @format character varying
+   */
   title: string;
 
   /** @format text */
   description?: string;
 
-  /** @format integer */
+  /**
+   * 发布年份
+   * @format integer
+   */
   release_year?: number;
 
   /**
