@@ -3,9 +3,9 @@
     "0.13330b53.iframe.bundle.js": "/0.13330b53.iframe.bundle.js",
     "main.js": "/main.6ae0723a.iframe.bundle.js",
     "runtime~main.js": "/runtime~main.ee3a50b7.iframe.bundle.js",
-    "vendors~main.css": "/static/css/vendors~main.079920dc.chunk.css",
+    "vendors~main.css": "/static/css/vendors~main.d1b45cdd.chunk.css",
     "vendors~main.js": "/vendors~main.73c0918e.iframe.bundle.js",
-    "vendors~main.css.map": "/static/css/vendors~main.079920dc.chunk.css.map",
+    "vendors~main.css.map": "/static/css/vendors~main.d1b45cdd.chunk.css.map",
     "vendors~main.js.map": "/vendors~main.73c0918e.iframe.bundle.js.map",
     "4.58bb6d64.iframe.bundle.js": "/4.58bb6d64.iframe.bundle.js",
     "4.58bb6d64.iframe.bundle.js.map": "/4.58bb6d64.iframe.bundle.js.map",
@@ -20,7 +20,7 @@
   },
   "entrypoints": [
     "runtime~main.ee3a50b7.iframe.bundle.js",
-    "static/css/vendors~main.079920dc.chunk.css",
+    "static/css/vendors~main.d1b45cdd.chunk.css",
     "vendors~main.73c0918e.iframe.bundle.js",
     "main.6ae0723a.iframe.bundle.js"
   ]
