@@ -5,7 +5,7 @@ import LightTable from "core/ui/table/LightTable"
 import { StaticTable } from "core/ui/table/StaticTable"
 import { each, startsWith, without } from "lodash"
 import React from "react"
-import { ColumnMeta, TableMeta, useTableMeta } from "../../db/meta/useTableMeta"
+import { ColumnMeta, useMeta, useTableMeta } from "../../db/meta/useTableMeta"
 import useSchema from "..//useSchema"
 import { Item } from "../schema"
 import { Draft, JoinItem, UserItem } from "../type"
@@ -46,24 +46,23 @@ export const addJoin = (draft: Draft) => {
 
 /**
  *
- *   join column template
+ *  default join column template
  */
-export const join = (
-  { table: fromTable, name }: ColumnMeta,
-  fromMeta: TableMeta
-) => {
+export const join = ({ name, table: fromTable }: ColumnMeta) => {
   const [table, field] = name.replace(JOIN_PREFIX, "").split(JOIN_KEY_SPLITER)
   const getDefaultCols = useGetDefaultCols()
 
+  const meta = useMeta()
+
   return {
-    title: <Text keyboard>{fromMeta.tableDesc || fromTable}</Text>,
+    title: <Text keyboard>{meta[table].tableDesc || table}</Text>,
     render: (val: [], record) => (
       <Dialog trigger={<BadgeNumber num={val.length} />}>
         <LightTable
           {...useSchema(
             table,
             { [field]: false },
-            { params: { [field]: record[fromMeta.keys.toString()] } }
+            { params: { [field]: record[meta[fromTable].keys.toString()] } }
           )}
           subTitle={record[getDefaultCols(fromTable)[0]]}
         ></LightTable>

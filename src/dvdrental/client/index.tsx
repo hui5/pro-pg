@@ -13,6 +13,7 @@ export const client = initClient({
   staticMeta,
   config,
   subscribe: true,
+  baseSchema: "public",
 })
 
 export const useSchema: UseSchema<definitions> = _useSchema

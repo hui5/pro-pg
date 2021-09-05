@@ -17,7 +17,6 @@ const { Text, Link } = Typography
  *    many-to-one realation
  *
  *
- *    embed data name :  [foreignFiedld]__[foreignTable]
  *
  */
 
@@ -125,7 +124,7 @@ export type EmbedParams = {
 
 /**
  *
- *  embed column template
+ * default embed column template
  */
 export const embed = (
   { table, name: col }: Column,

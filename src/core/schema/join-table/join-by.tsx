@@ -64,7 +64,7 @@ const schemaData = (schema) =>
 
 /**
  *
- *  join by column template
+ * default join by column template
  */
 
 export const joinBy = ({ name }: ColumnMeta, tableMeta: TableMeta) => {

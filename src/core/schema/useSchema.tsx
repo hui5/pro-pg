@@ -13,7 +13,6 @@ import {
   union,
 } from "lodash"
 import { DATATYPE_USERDEF, defaultSchema } from "../column"
-import { useClient } from "../db/client/ClientContext"
 import { useTableMeta } from "../db/meta/useTableMeta"
 import { hideColumns } from "./columns/hide"
 import { orderColumns } from "./columns/order"
@@ -88,11 +87,9 @@ const useSchema: UseSchema<any> = (
   const _joinBy = mapKeys(joinBy, (_, key) => JOIN_BY_PREFIX + key)
   defaultsDeep(userDef, _join, _joinBy)
 
-  const { config } = useClient()
-
   const draft: Draft = {
     name,
-    select: cols.join(","),
+    select: "*",
     // TODO  support compose keys
     id: meta.keys[0],
     isView: meta.isViewTable,
@@ -115,7 +112,7 @@ const useSchema: UseSchema<any> = (
         { dataIndex: col, _column: column },
         // user def
         isPlainObject(def) ? def : isNumber(def) ? { _order: def } : {},
-        defaultSchema(column, config, meta, params)
+        defaultSchema(column, meta, params)
       )
     }),
   }

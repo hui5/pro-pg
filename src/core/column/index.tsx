@@ -2,9 +2,10 @@ import { Rule } from "antd/lib/form"
 import array from "core/column/valuetype/array"
 import boolean from "core/column/valuetype/boolean"
 import date from "core/column/valuetype/date"
+import { useClient } from "core/db/client/ClientContext"
 import { ColumnMeta, TableMeta } from "core/db/meta/useTableMeta"
 import { defaultsDeep, isArray, isFunction, merge } from "lodash"
-import { Config } from "../schema/config"
+import { useMemo } from "react"
 import { embed, EmbedParams } from "../schema/join-table/embed"
 import { join } from "../schema/join-table/join"
 import { joinBy } from "../schema/join-table/join-by"
@@ -31,6 +32,20 @@ export const defaultTemplate = {
   embed,
 }
 
+export const useTemplate = () => {
+  const { config } = useClient()
+  return useMemo(() => {
+    return new Proxy(defaultTemplate, {
+      get: function (target, prop) {
+        return isFunction(target[prop])
+          ? (...args) =>
+              merge(target[prop](...args), config.template?.[prop]?.(...args))
+          : merge(target[prop], config.template?.[prop])
+      },
+    })
+  }, [config])
+}
+
 /**
  *
  *
@@ -41,11 +56,14 @@ export const defaultTemplate = {
  */
 export const defaultSchema = (
   column: Column,
-  config: Config<any>,
   tableMeta: TableMeta,
   params: Record<string, any>
 ) => {
   const { table, name, defaultValue } = column
+
+  const { config } = useClient()
+
+  const template = useTemplate()
 
   let schemaDef = config.schema?.[table]?.[name]
   if (isFunction(schemaDef)) {
@@ -84,19 +102,10 @@ export const defaultSchema = (
     config.baseColumns?.[name]
   )
 
-  const template = new Proxy(defaultTemplate, {
-    get: function (target, prop) {
-      return isFunction(target[prop])
-        ? (...args) =>
-            merge(target[prop](...args), config.template?.[prop]?.(...args))
-        : merge(target[prop], config.template?.[prop])
-    },
-  })
-
   const templateSchema: Item = defaultsDeep(
     {},
 
-    column.isJoin && template.join(column, tableMeta),
+    column.isJoin && template.join(column),
     column.isJoinBy && template.joinBy(column, tableMeta),
     column.isEmbed && template.embed(column, params as EmbedParams),
 

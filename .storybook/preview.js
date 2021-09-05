@@ -1,6 +1,3 @@
-import { client } from "client/demo"
-import { ClientProvider } from "core/db/client/ClientContext"
-
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
   controls: {
@@ -9,12 +6,9 @@ export const parameters = {
       date: /Date$/,
     },
   },
+  docs: {
+    source: {
+      state: "open",
+    },
+  },
 }
-
-export const decorators = [
-  (Story) => (
-    <ClientProvider client={client}>
-      <Story />
-    </ClientProvider>
-  ),
-]

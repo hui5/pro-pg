@@ -25,12 +25,14 @@ export const initClient = ({
   subscribe = false,
   staticMeta = {},
   config = {},
+  baseSchema = "base",
 }: {
   API_URL: string
   API_KEY?: string
   subscribe?: boolean
   staticMeta?: any
   config?: Config<any>
+  baseSchema?: string
 }) => {
   let pg: PostgrestClient,
     pg_base: PostgrestClient,
@@ -39,12 +41,12 @@ export const initClient = ({
 
   if (API_KEY) {
     supabase = createClient(API_URL, API_KEY)
-    supabase_base = createClient(API_URL, API_KEY, { schema: "base" })
+    supabase_base = createClient(API_URL, API_KEY, { schema: baseSchema })
     pg = supabase as any
     pg_base = supabase_base as any
   } else {
     pg = new PostgrestClient(API_URL)
-    pg_base = new PostgrestClient(API_URL, { schema: "base" })
+    pg_base = new PostgrestClient(API_URL, { schema: baseSchema })
   }
 
   // global queryClient

@@ -5,7 +5,6 @@ import React, { useRef } from "react"
 import { Operate } from "../../action/operate"
 import { useAction } from "../../action/useAction"
 import { Schema } from "../../schema/schema"
-import { Client, ClientProvider } from "core/db/client/ClientContext"
 
 type TableProps<T> = {
   schema: Schema
@@ -28,7 +27,8 @@ const Table = <T extends object>({
     useAction<T>({
       schema,
       actionRef,
-      operates: operates || (schema.isView ? [] : ["inline_edit", "edit"]),
+      operates:
+        operates || (schema.isView ? [] : ["create", "inline_edit", "edit"]),
     })
 
   return (
