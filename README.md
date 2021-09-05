@@ -6,5 +6,5 @@
 * PostgREST, supabase Realtime,  
 * PostgreSQL.
 
-## examples
+## example
 https://pro-pg.vercel.app/?path=/docs/examples--0-default
